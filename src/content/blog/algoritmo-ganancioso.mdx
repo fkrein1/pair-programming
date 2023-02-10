@@ -40,6 +40,7 @@ def get_optimal_theft(capacity: int, weights: list[int], values: list[int]):
 ```
 
 ## Salário Máximo
+
 Como a última pergunta de uma entrevista bem-sucedida, seu chefe lhe dá algumas folhas de papel com números e pede que você componha o maior número possível a partir destes números. O número resultante será o seu salário, então você está muito interessado em maximizá-lo. Como você pode fazer isso?
 
 ### Solução
@@ -58,4 +59,31 @@ def get_max_salary(a: list[str]):
         max_salary += max
         a.remove(max)
     return max_salary
+```
+
+## Coletando Assinatura
+
+Você é responsável por coletar assinaturas de todos os moradores de um determinado prédio. Para cada morador, você conhece um período de tempo em que ele ou ela está em casa. Você gostaria de coletar todas as assinaturas visitando o prédio o menos possível.
+
+### Solução
+
+O modelo matemático para este problema consiste em dar uma solução para marcar o menor número possível de pontos em uma linha, a fim de garantir que todos os segmentos presentes na linha contenham pelo menos um ponto marcado.
+
+Para isso, basta ordenar os horários de disponibilidade de cada morador de acordo com o final de cada período. Em seguida, a cada iteração, você verifica se o próximo morador está disponível. Caso a resposta seja negativa, o último horário do próximo morador é incluído na lista de visitas. Dessa forma, é possível coletar todas as assinaturas de maneira eficiente, minimizando as visitas ao prédio com um Algoritimo Ganacioso.
+
+
+```python
+# Python
+def best_times(segments: list[tuple]):
+    segments.sort(key=lambda a: a[1])
+    points = [segments[0][1]]
+
+    for s in segments:
+        if s[0] <= points[-1] <= s[1]:
+            continue
+        else:
+            points.append(s[1])
+
+    return points
+
 ```
