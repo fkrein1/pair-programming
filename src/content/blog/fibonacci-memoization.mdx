@@ -30,9 +30,11 @@ def fib(num):
         return fib(num - 2) + fib(num - 1)
 ```
 
-### Otimização com Memoização
+## Otimização com Memoização
 
-Este algoritmo pode ser otimizado usando memoização. Em cada chamada recursiva, o valor é salvo em um mapa hash com complexidade O(1) para leitura e escrita. Isso torna a função muito mais rápida, com uma complexidade O(n) semelhante a uma função iterativa. No entanto, no Python, o tamanho da pilha de chamadas padrão é de 999, então números maiores teriam que ser calculados usando um loop convencional.
+Este algoritmo pode ser otimizado usando memoização. Em cada chamada recursiva, o valor é salvo em um mapa hash com complexidade O(1) para leitura e escrita. Isso torna a função muito mais rápida, com uma complexidade O(n) semelhante a uma função iterativa. 
+
+No entanto, no Python, o tamanho da pilha de chamadas padrão é de 999, então números maiores teriam que ser calculados usando um loop convencional.
 
 
 ```python
