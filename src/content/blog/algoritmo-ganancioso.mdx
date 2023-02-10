@@ -1,0 +1,61 @@
+---
+title: 'Algoritmo Ganacioso'
+description: 'O algoritmo ganancioso tem como objetivo encontrar a solução ótima passo a passo'
+pubDate: 'Feb 10 2023'
+heroImage: '/greedy-algorithm.jpg'
+---
+
+## O que é um Algoritimo Ganancioso?
+
+O algoritmo ganancioso tem como objetivo encontrar a solução ótima passo a passo, escolhendo a cada etapa a opção que trará o maior benefício de forma imediata. Neste modelo, a escolha do melhor caminho local leva à solução globalmente ótima, tornando-o uma abordagem ideal para solução de problemas.
+
+## Mochila do Ladrão
+
+Um ladrão descobre uma caverna rica em tesouros preciosos, mas sua mochila tem uma limitação de peso de apenas 30 quilos. Diante desse desafio, você deve ajudá-lo a escolher a combinação mais valiosa de itens, levando em consideração que é possível colocar qualquer fração de um item em sua mochila.
+
+### Solução
+
+Esse problema pode ser solucionado utilizando o Algoritmo Ganancioso em tempo de complexidade O(n log n). Inicialmente, é criada uma lista de tuplas que contém o valor/peso e o peso de cada item, ordenados pelo item de maior valor/peso. Em seguida, a mochila é preenchida com a quantidade máxima dos itens de maior valor até sua capacidade ser atingida.
+
+```python
+# Python
+def get_optimal_theft(capacity: int, weights: list[int], values: list[int]):
+    value = 0
+    items = []
+
+    for i in range(len(weights)):
+        items.append((values[i] / weights[i], weights[i]))
+
+    items.sort(reverse=True)
+
+    for item in items:
+        if capacity > item[1]:
+            value += item[1] * item[0]
+            capacity -= item[1]
+        else:
+            value += item[0] * capacity
+            return value
+
+    return value
+```
+
+## Salário Máximo
+Como a última pergunta de uma entrevista bem-sucedida, seu chefe lhe dá algumas folhas de papel com números e pede que você componha o maior número possível a partir destes números. O número resultante será o seu salário, então você está muito interessado em maximizá-lo. Como você pode fazer isso?
+
+### Solução
+
+Este problema parece ser simples à primeira vista, mas ao considerar entradas como [2, 21] ou [912, 99], a ordenação tradicional resultaria em 212 e 91299, respectivamente. O Algoritmo Ganancioso é uma abordagem eficiente, pois realiza uma comparação ótima local em cada iteração para determinar se "2" + "21" é maior que "21" + "2". Desta forma, o problema pode ser resolvido em O(n²) ao identificar o maior valor em cada interação e removê-lo da lista.
+
+```python
+# Python
+def get_max_salary(a: list[str]):
+    max_salary = ""
+    while len(a) > 0:
+        max = a[0]
+        for x in a:
+            if x + max >= max + x:
+                max = x
+        max_salary += max
+        a.remove(max)
+    return max_salary
+```
