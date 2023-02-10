@@ -1,0 +1,48 @@
+---
+title: 'Memoização da Fibonacci'
+description: 'A sequência de Fibonacci pode ser calculada com um algoritmo ineficiente ou com memoização para aumentar a eficiência.'
+pubDate: 'Feb 11 2023'
+heroImage: '/fibonacci-memo.jpg'
+---
+
+## O que é a sequência Fibonacci?
+
+A sequência de Fibonacci é uma série de números que começa com 0 e 1, e cada número subsequente é a soma dos dois anteriores. A sequência rapidamente se transforma em números muito grandes, como ilustrado abaixo:
+
+```
+[0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233]
+```
+- F<sub>50</sub> = 125.862.69.025
+- F<sub>100</sub> = 354.224.848.179.261.915.075
+
+
+## Algoritimo Ingênuo
+
+Um número na sequência de Fibonacci pode ser calculado usando a função recursiva abaixo, no entanto, este algoritmo possui uma complexidade de tempo de O(2^n). Isso significa que a cada número adicionado à sequência, o número de cálculos necessários aumenta exponencialmente.
+
+
+```python
+# Python
+def fib(num):
+    if num <= 1:
+        return num
+    else:
+        return fib(num - 2) + fib(num - 1)
+```
+
+### Otimização com Memoização
+
+Este algoritmo pode ser otimizado usando memoização. Em cada chamada recursiva, o valor é salvo em um mapa hash com complexidade O(1) para leitura e escrita. Isso torna a função muito mais rápida, com uma complexidade O(n) semelhante a uma função iterativa. No entanto, no Python, o tamanho da pilha de chamadas padrão é de 999, então números maiores teriam que ser calculados usando um loop convencional.
+
+
+```python
+# Python
+def memo_fib(n, m={0: 0, 1: 1}):
+    try:
+        return m[n]
+
+    except:
+        fib = memo_fib(n - 1) + memo_fib(n - 2)
+        m[n] = fib
+        return m[n]
+```
