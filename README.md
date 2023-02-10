@@ -1,11 +1,13 @@
-# Astro Blog
+# Pair Programming
 
-- ✅ [Pair Programming](https://www.pairprogramming.com.br/)
-- ✅ Minimal styling
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ Markdown & MDX support
+[Pair Programming](https://www.pairprogramming.com.br/)
+
+## About Astro
+- ✔️ Minimal styling
+- ✔️ 100/100 Lighthouse performance
+- ✔️ SEO-friendly with canonical URLs and OpenGraph data
+- ✔️ Sitemap support
+- ✔️ Markdown & MDX support
 
 ## Project Structure
 
