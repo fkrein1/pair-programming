@@ -1,0 +1,79 @@
+---
+title: 'Otimização com Fila e Hash Set'
+description: 'A solução eficiente para o problema de fechamento de chaves válidas utilizando filas e conjunto hash.'
+pubDate: 'Feb 12 2023'
+heroImage: '/queue_totoro.jpg'
+altText: 'uma imagem gerada por computador com vários totoros em fila'
+---
+
+## Fechamento de chaves válidas
+Um dos problemas do [LeetCode](https://leetcode.com/) é dada uma string que contém apenas os caracteres:
+
+```
+'(', ')', '{', '}', '[', ']'
+```
+determine se a string é válida, considerando que:
+- As chaves abertas devem ser fechadas pelo mesmo tipo de chaves.
+- As chaves abertas devem ser fechadas na ordem correta.
+- Cada chave fechada possui uma chave aberta correspondente do mesmo tipo.
+
+## Solução Inicial
+Nesta primeira solução, é criado um dicionário para armazenar a correspondência entre os caracteres de fechamento e abertura. Em seguida, é feito um loop na string de entrada para verificar se cada caractere é de abertura ou fechamento.
+
+Quando encontrado um caractere de abertura, ele é adicionado a uma lista. Se for um caractere de fechamento, é verificado se o último elemento da lista corresponde ao caractere de abertura correspondente. Se corresponderem, o último elemento é removido da lista com o método pop().
+
+Ao final, verifica-se se a lista está vazia e se todos os caracteres foram abertos e fechados corretamente.
+
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        list_queue = []
+        brackets = {
+            ")": "(",
+            "}": "{",
+            "]": "["
+        }
+        for char in s:
+            if char in brackets.values():
+                list_queue.append(char)
+            else:
+                if len(list_queue) == 0 or list_queue[-1] != brackets[char]:
+                    return False
+                else:
+                    list_queue.pop()
+        return len(list_queue) == 0
+```
+![gráfico de performance do algoritmo runtime em 32s e beats 73,63% das soluções](/nao-otimizada-hashset-filas.jpg)
+
+## Solução Otimizada
+Esta solução pode ser otimizada utilizando uma lista encadeada (deque), que possui uma complexidade de tempo O(1) para escrita e retirada de elementos nas pontas.
+
+Além disso, é criado um conjunto hash para verificação de caracteres de abertura, também com complexidade O(1), pois a leitura das chaves de um dicionário é feita em O(1), mas a busca pelo valor é em O(n).
+
+Essas duas otimização tornam o algoritmo consideravelmente mais rápido sendo mais eficiente que 94,84% das soluções submetidas ao LeetCode.
+
+```python
+
+from collections import deque
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        queue = deque()
+        brackets_set = {"(", "{", "["}
+        brackets = {
+            ")": "(",
+            "}": "{",
+            "]": "["
+        }
+        for char in s:
+            if char in brackets_set:
+                queue.append(char)
+            else:
+                if len(queue) == 0 or queue[-1] != brackets[char]:
+                    return False
+                else:
+                    queue.pop()
+        return len(queue) == 0
+```
+
+![gráfico de performance do algoritmo runtime em 32s e beats 73,63% das soluções](/otimizada-hashset-filas.jpg)
