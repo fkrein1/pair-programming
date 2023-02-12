@@ -43,7 +43,7 @@ class Solution:
                     list_queue.pop()
         return len(list_queue) == 0
 ```
-![gráfico de performance do algoritmo runtime em 32s e beats 73,63% das soluções](/nao-otimizada-hashset-filas.jpg)
+![Gráfico de performance do algoritmo runtime em 32ms e vence 73,63% das soluções do LeetCode](/nao-otimizada-hashset-filas.jpg)
 
 ## Solução Otimizada
 Esta solução pode ser otimizada utilizando uma lista encadeada (deque), que possui uma complexidade de tempo O(1) para escrita e retirada de elementos nas pontas.
@@ -76,4 +76,4 @@ class Solution:
         return len(queue) == 0
 ```
 
-![gráfico de performance do algoritmo runtime em 32s e beats 73,63% das soluções](/otimizada-hashset-filas.jpg)
+![Gráfico de performance do algoritmo runtime em 26ms e vence 94,84% das soluções do LeetCode](/otimizada-hashset-filas.jpg)
